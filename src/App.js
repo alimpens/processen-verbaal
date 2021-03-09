@@ -44,7 +44,7 @@ function App() {
   const [value, setValue] = useState()
   const [downloadLoading, downloadFile, error] = useDownload()
   const [resetError, setResetError] = useState(false)
-  const [hideButton, setHideButton] = useState(true)
+  const [disableButton, setDisableButton] = useState(true)
 
   useEffect(() => {
     let isMounted = true;
@@ -63,7 +63,7 @@ function App() {
   const handleChange = e => {
     setValue(e.target.value)
     setResetError(true)
-    setHideButton(false)
+    setDisableButton(false)
   }
 
   const handleClick = () => {
@@ -103,15 +103,15 @@ function App() {
                 </option>
               )}
             </StyledSelect>
-            {!hideButton &&
             <Button
               type='button'
               iconLeft={downloadLoading ? <Spinner /> : <Download />}
               onClick={handleClick}
               variant='primary'
+              disabled={disableButton}
             >
               Download
-            </Button>}
+            </Button>
             {error && !resetError && <ErrorMessage message="Deze download is niet beschikbaar" />}
           </StyledForm> :
           <SpinnerWrapper>
