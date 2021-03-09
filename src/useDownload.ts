@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import fileSaver from 'file-saver'
 
-function useDownload(): [
-  boolean,
-  (url: string, options: Object, fileName?: string) => Promise<void>,
-] {
+function useDownload() {
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   async function downloadFile(url: string, options = {}, fileName = '') {
     setLoading(true)
@@ -17,9 +15,17 @@ function useDownload(): [
         fileSaver(blob, fileName || url.split('/').pop())
         setLoading(false)
       })
+      .catch(() => {
+        setError(true)
+        setLoading(false)
+      })
   }
 
-  return [loading, downloadFile]
+  return [
+    loading,
+    downloadFile,
+    error
+  ]
 }
 
 export default useDownload

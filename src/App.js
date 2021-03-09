@@ -11,6 +11,7 @@ import {
   Button,
   themeSpacing,
   Spinner,
+  ErrorMessage
 } from '@amsterdam/asc-ui'
 import { Download } from '@amsterdam/asc-assets'
 import styled from 'styled-components'
@@ -40,7 +41,9 @@ const SpinnerWrapper = styled.div`
 
 function App() {
   const [data, setData] = useState()
-  const [downloadLoading, downloadFile] = useDownload()
+  const [value, setValue] = useState()
+  const [downloadLoading, downloadFile, error] = useDownload()
+  const [resetError, setResetError] = useState(false)
 
   useEffect(() => {
     let isMounted = true;
@@ -56,7 +59,15 @@ function App() {
     return () => { isMounted = false; }
   }, [])
 
-  console.log(data)
+  const handleChange = e => {
+    setValue(e.target.value)
+    setResetError(true)
+  }
+
+  const handleClick = () => {
+    downloadFile(value)
+    setResetError(false)
+  }
 
   return (
     <ThemeProvider>
@@ -75,19 +86,25 @@ function App() {
           </Paragraph>
           {data ?
           <StyledForm>
-            <StyledSelect>
-              {data._embedded?.processenverbaal?.map(({ id, volgnummer, stemlocatie }) =>
-                <option key={id}>{`Stemlokaal ${zeroPad(volgnummer, 3)} (${stemlocatie})`}</option>
+            <StyledSelect value={value} onChange={handleChange}>
+              {data._embedded?.processenverbaal?.map(({ id, volgnummer, stemlocatie, uri }) =>
+                <option
+                  key={id}
+                  value={uri}
+                >
+                  {`Stembureau ${zeroPad(volgnummer, 3)} (${stemlocatie})`}
+                </option>
               )}
             </StyledSelect>
             <Button
               type='button'
               iconLeft={downloadLoading ? <Spinner /> : <Download />}
-              onClick={() => downloadFile("https://0855010431b44f9caec7803bce29def8.objectstore.eu/processenverbaal/2021/001.procesverbaaltk21.Amstel1.pdf")}
+              onClick={handleClick}
               variant='primary'
             >
               Download
             </Button>
+            {error && !resetError && <ErrorMessage message="Deze download is niet beschikbaar" />}
           </StyledForm> :
           <SpinnerWrapper>
             <Spinner size={24} />
