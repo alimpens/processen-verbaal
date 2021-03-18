@@ -44,6 +44,7 @@ function App() {
   const [value, setValue] = useState()
   const [downloadLoading, downloadFile, error] = useDownload()
   const [resetError, setResetError] = useState(false)
+  const [disableButton, setDisableButton] = useState(true)
 
   useEffect(() => {
     let isMounted = true;
@@ -62,6 +63,7 @@ function App() {
   const handleChange = e => {
     setValue(e.target.value)
     setResetError(true)
+    setDisableButton(false)
   }
 
   const handleClick = () => {
@@ -78,21 +80,26 @@ function App() {
           span={{ small: 1, medium: 2, big: 4, large: 7, xLarge: 7 }}
           push={{ small: 0, medium: 0, big: 1, large: 1, xLarge: 1 }}
         >
-          <Heading gutterBottom={28}>Processen-verbaal stemlocaties Tweede Kamerverkiezingen 2021</Heading>
-          <Paragraph>Na de Tweede Kamerverkiezingen in maart 2021 is er door ieder stemlokaal in de stad Amsterdam een proces verbaal opgemaakt.</Paragraph>
-          <Paragraph>Hier kunt u het proces verbaal van alle stemlocaties in Amsterdam vinden.</Paragraph>
+          <Heading gutterBottom={28}>Proces verbalen stembureaus Amsterdam Tweede Kamerverkiezingen 2021</Heading>
+          <Paragraph>Hier kunt u de proces verbalen van de Amsterdamse stembureaus downloaden.</Paragraph>
           <Paragraph>
-            <Link href='#' variant='inline'>Bekijk hier de lijst met alle stemlokalen</Link>
+            <Link href='./2021-03-15-alle-stembureaus-voor-uitslag.pdf' variant='inline' target='_blank'>Bekijk hier de lijst met alle stembureaus</Link>
           </Paragraph>
           {data ?
           <StyledForm>
-            <StyledSelect value={value} onChange={handleChange}>
-              {data._embedded?.processenverbaal?.map(({ id, volgnummer, stemlocatie, uri }) =>
+            <StyledSelect
+              defaultValue={'placeholder'}
+              value={value}
+              onChange={handleChange}
+              label={'Kies stembureau'}
+            >
+              <option value='placeholder' disabled hidden>Maak een keuze</option>
+              {data._embedded?.processenverbaal?.map(({ id, volgnummer, uri }) =>
                 <option
                   key={id}
                   value={uri}
                 >
-                  {`Stembureau ${zeroPad(volgnummer, 3)} (${stemlocatie})`}
+                  {`Stembureau ${zeroPad(volgnummer, 3)}`}
                 </option>
               )}
             </StyledSelect>
@@ -101,6 +108,7 @@ function App() {
               iconLeft={downloadLoading ? <Spinner /> : <Download />}
               onClick={handleClick}
               variant='primary'
+              disabled={disableButton || downloadLoading}
             >
               Download
             </Button>
