@@ -94,12 +94,12 @@ function App() {
               label={'Kies stembureau'}
             >
               <option value='placeholder' disabled hidden>Maak een keuze</option>
-              {data._embedded?.processenverbaal?.map(({ id, volgnummer, stemlocatie, uri }) =>
+              {data._embedded?.processenverbaal?.map(({ id, volgnummer, uri }) =>
                 <option
                   key={id}
                   value={uri}
                 >
-                  {`Stembureau ${zeroPad(volgnummer, 3)} (${stemlocatie})`}
+                  {`Stembureau ${zeroPad(volgnummer, 3)}`}
                 </option>
               )}
             </StyledSelect>
