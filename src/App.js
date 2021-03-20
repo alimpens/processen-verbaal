@@ -94,7 +94,7 @@ function App() {
               label={'Kies stembureau'}
             >
               <option value='placeholder' disabled hidden>Maak een keuze</option>
-              {data._embedded?.processenverbaal?.map(({ id, volgnummer, uri }) =>
+              {data._embedded?.processenverbaal?.sort((a,b) => a.volgnummer-b.volgnummer).map(({ id, volgnummer, uri }) =>
                 <option
                   key={id}
                   value={uri}
