@@ -83,7 +83,7 @@ function App() {
           <Heading gutterBottom={28}>Proces verbalen stembureaus Amsterdam Tweede Kamerverkiezingen 2021</Heading>
           <Paragraph>Hier kunt u de proces verbalen van de Amsterdamse stembureaus downloaden.</Paragraph>
           <Paragraph>
-            <Link href='./2021-03-15-alle-stembureaus-voor-uitslag.pdf' variant='inline' target='_blank'>Bekijk hier de lijst met alle stembureaus</Link>
+            <Link href={`${process.env.REACT_APP_URL}/2021-03-15-alle-stembureaus-voor-uitslag.pdf`} variant='inline' target='_blank'>Bekijk hier de lijst met alle stembureaus</Link>
           </Paragraph>
           {data ?
           <StyledForm>

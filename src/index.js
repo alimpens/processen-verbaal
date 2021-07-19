@@ -5,12 +5,28 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { registerHeightObserver } from 'element-height-observer'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// render micro frontend function
+window.renderApp = () => {
+  const container = document.getElementById('micro-frontend')
+  if (container) {
+    ReactDOM.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>,
+      container
+    );
+  }
+};
+
+// Mount to root if it is not a micro frontend
+if (!document.getElementById('micro-frontend')) {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
