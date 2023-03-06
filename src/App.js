@@ -45,6 +45,8 @@ function App() {
   useEffect(() => {
     let isMounted = true
 
+    setData(null)
+
     fetch(`${urlFragment}*${election}*`)
       .then((response) => response.json())
       .then((json) => {
@@ -105,7 +107,7 @@ function App() {
       <Paragraph>
         {config && (
           <Link
-            href={`${config?.applicatie['extra-velden']?.variabelen?.value}2022-03-16-alle-stembureaus-voor-uitslag.pdf`}
+            href={`${config?.applicatie['extra-velden']?.variabelen?.value}stembureaus-amsterdam-weesp.pdf`}
             variant="inline"
             target="_blank"
           >
