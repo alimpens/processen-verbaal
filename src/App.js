@@ -37,7 +37,7 @@ function App() {
   const [data, setData] = useState()
   const [config, setConfig] = useState()
   const [election, setElection] = useState('provinciale_staten')
-  const [value, setValue] = useState()
+  const [value, setValue] = useState('placeholder')
   const [downloadLoading, downloadFile, error] = useDownload()
   const [resetError, setResetError] = useState(false)
   const [disableButton, setDisableButton] = useState(true)
@@ -124,14 +124,19 @@ function App() {
           <option value="provinciale_staten">
             Provinciale Staten Noord-Holland
           </option>
-          <option value="agv">Waterschap Amstel, Gooi en Vecht</option>
-          <option value="hn">Hoogheemraadschap Hollands Noorderkwartier</option>
-          <option value="rijnland">Hoogheemraadschap van Rijnland</option>
+          <option value="waterschap_agv">
+            Waterschap Amstel, Gooi en Vecht
+          </option>
+          <option value="waterschap_hnk">
+            Hoogheemraadschap Hollands Noorderkwartier
+          </option>
+          <option value="waterschap_rijnland">
+            Hoogheemraadschap van Rijnland
+          </option>
         </StyledSelect>
         {data ? (
           <>
             <StyledSelect
-              defaultValue={'placeholder'}
               value={value}
               onChange={handleChange}
               label={'Kies stembureau'}
