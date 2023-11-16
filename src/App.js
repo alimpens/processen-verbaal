@@ -107,7 +107,7 @@ function App() {
       <Paragraph>
         {config && (
           <Link
-            href={`${config?.applicatie['extra-velden']?.variabelen?.value}stembureaus-amsterdam-weesp.pdf`}
+            href={`${config?.applicatie['extra-velden']?.variabelen?.value}overzicht-stembureaus-tk-2023.pdf`}
             variant="inline"
             target="_blank"
           >
