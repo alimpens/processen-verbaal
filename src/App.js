@@ -15,7 +15,7 @@ import styled from 'styled-components'
 import useDownload from './useDownload'
 
 const urlFragment =
-  'https://api.data.amsterdam.nl/v1/verkiezingen/processenverbaal/?verkiezingsjaar=2023&page_size=10000&&documentnaam[like]='
+  'https://api.data.amsterdam.nl/v1/verkiezingen/processenverbaal/?verkiezingsjaar=2023&page_size=10000&documentnaam[like]='
 
 const zeroPad = (num, places) => String(num).padStart(places, '0')
 
@@ -36,7 +36,7 @@ const SpinnerWrapper = styled.div`
 function App() {
   const [data, setData] = useState()
   const [config, setConfig] = useState()
-  const [election, setElection] = useState('provinciale_staten')
+  const [district, setDistrict] = useState('_c')
   const [value, setValue] = useState('placeholder')
   const [downloadLoading, downloadFile, error] = useDownload()
   const [resetError, setResetError] = useState(false)
@@ -47,7 +47,7 @@ function App() {
 
     setData(null)
 
-    fetch(`${urlFragment}*${election}*`)
+    fetch(`${urlFragment}*${district}`)
       .then((response) => response.json())
       .then((json) => {
         if (isMounted) {
@@ -58,7 +58,7 @@ function App() {
     return () => {
       isMounted = false
     }
-  }, [election])
+  }, [district])
 
   useEffect(() => {
     let isMounted = true
@@ -80,8 +80,8 @@ function App() {
     }
   }, [])
 
-  const handleElectionChange = (e) => {
-    setElection(e.target.value)
+  const handleDistrictChange = (e) => {
+    setDistrict(e.target.value)
     setValue('placeholder')
     setDisableButton(true)
   }
@@ -117,22 +117,19 @@ function App() {
       </Paragraph>
       <StyledForm>
         <StyledSelect
-          value={election}
-          onChange={handleElectionChange}
-          label={'Kies verkiezing'}
+          value={district}
+          onChange={handleDistrictChange}
+          label={'Kies stadsdeel'}
         >
-          <option value="provinciale_staten">
-            Provinciale Staten Noord-Holland
-          </option>
-          <option value="waterschap_agv">
-            Waterschap Amstel, Gooi en Vecht
-          </option>
-          <option value="waterschap_hnk">
-            Hoogheemraadschap Hollands Noorderkwartier
-          </option>
-          <option value="waterschap_rijnland">
-            Hoogheemraadschap van Rijnland
-          </option>
+          <option value="_c">Centrum</option>
+          <option value="_nw">Nieuw-West</option>
+          <option value="_n">Noord</option>
+          <option value="_o">Oost</option>
+          <option value="_w">West</option>
+          <option value="_z">Zuid</option>
+          <option value="_zo">Zuidoost</option>
+          <option value="_w">Weesp</option>
+          <option value="">Alle</option>
         </StyledSelect>
         {data ? (
           <>
