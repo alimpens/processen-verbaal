@@ -128,7 +128,7 @@ function App() {
           <option value="_w">West</option>
           <option value="_z">Zuid</option>
           <option value="_zo">Zuidoost</option>
-          <option value="_w">Weesp</option>
+          <option value="_wp">Weesp</option>
           <option value="">Alle</option>
         </StyledSelect>
         {data ? (
