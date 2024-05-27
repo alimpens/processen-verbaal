@@ -15,7 +15,7 @@ import styled from 'styled-components'
 import useDownload from './useDownload'
 
 const urlFragment =
-  'https://api.data.amsterdam.nl/v1/verkiezingen/processenverbaal/?verkiezingsjaar=2023&page_size=10000&documentnaam[like]='
+  'https://api.data.amsterdam.nl/v1/verkiezingen/processenverbaal/?verkiezingsjaar=2024&page_size=10000&documentnaam[like]='
 
 const zeroPad = (num, places) => String(num).padStart(places, '0')
 
@@ -36,7 +36,7 @@ const SpinnerWrapper = styled.div`
 function App() {
   const [data, setData] = useState()
   const [config, setConfig] = useState()
-  const [district, setDistrict] = useState('_c')
+  const [district, setDistrict] = useState('.c.')
   const [value, setValue] = useState('placeholder')
   const [downloadLoading, downloadFile, error] = useDownload()
   const [resetError, setResetError] = useState(false)
@@ -47,7 +47,7 @@ function App() {
 
     setData(null)
 
-    fetch(`${urlFragment}*${district}`)
+    fetch(`${urlFragment}*${district}*`)
       .then((response) => response.json())
       .then((json) => {
         if (isMounted) {
@@ -121,14 +121,14 @@ function App() {
           onChange={handleDistrictChange}
           label={'Kies stadsdeel'}
         >
-          <option value="_c">Centrum</option>
-          <option value="_nw">Nieuw-West</option>
-          <option value="_n">Noord</option>
-          <option value="_o">Oost</option>
-          <option value="_w">West</option>
-          <option value="_z">Zuid</option>
-          <option value="_zo">Zuidoost</option>
-          <option value="_wp">Weesp</option>
+          <option value=".c.">Centrum</option>
+          <option value=".nw.">Nieuw-West</option>
+          <option value=".n.">Noord</option>
+          <option value=".o.">Oost</option>
+          <option value=".w.">West</option>
+          <option value=".z.">Zuid</option>
+          <option value=".zo.">Zuidoost</option>
+          <option value=".weesp.">Weesp</option>
           <option value="">Alle</option>
         </StyledSelect>
         {data ? (
