@@ -2,6 +2,7 @@
   "name": "processen-verbaal",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://alimpens.github.io/processen-verbaal/",
   "dependencies": {
     "@amsterdam/asc-assets": "*",
     "@amsterdam/asc-ui": "*",
