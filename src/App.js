@@ -93,7 +93,12 @@ function App() {
   }
 
   const handleClick = () => {
-    downloadFile(value)
+    downloadFile(value, {
+      headers: {
+        'X-Api-Key':
+          'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4NzgwODEzOTc4MjQwNDY0MDgsImV4cCI6MTc0NDcxNTc2MH0.YMne5bnppPc6ncLOzhGZIGNmHnc0QEuJC9zyXTZoXwsnVVfbBGOxi7yTv-HDKUSlsmw9C_xSU6AFPt41AcSSDw',
+      },
+    })
     setResetError(false)
   }
 
