@@ -36,7 +36,7 @@ const SpinnerWrapper = styled.div`
 function App() {
   const [data, setData] = useState()
   const [config, setConfig] = useState()
-  const [district, setDistrict] = useState('.C.')
+  const [district, setDistrict] = useState('.c.')
   const [value, setValue] = useState('placeholder')
   const [downloadLoading, downloadFile, error] = useDownload()
   const [resetError, setResetError] = useState(false)
@@ -126,14 +126,14 @@ function App() {
           onChange={handleDistrictChange}
           label={'Kies stadsdeel'}
         >
-          <option value=".C.">Centrum</option>
-          <option value=".NW.">Nieuw-West</option>
-          <option value=".N.">Noord</option>
-          <option value=".O.">Oost</option>
-          <option value=".W.">West</option>
-          <option value=".Z.">Zuid</option>
-          <option value=".ZO.">Zuidoost</option>
-          <option value=".Weesp.">Weesp</option>
+          <option value=".c.">Centrum</option>
+          <option value=".nw.">Nieuw-West</option>
+          <option value=".n.">Noord</option>
+          <option value=".o.">Oost</option>
+          <option value=".w.">West</option>
+          <option value=".z.">Zuid</option>
+          <option value=".zo.">Zuidoost</option>
+          <option value=".weesp.">Weesp</option>
           <option value="">Alle</option>
         </StyledSelect>
         {data ? (
