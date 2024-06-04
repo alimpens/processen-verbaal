@@ -15,7 +15,7 @@ import styled from 'styled-components'
 import useDownload from './useDownload'
 
 const urlFragment =
-  'https://api.data.amsterdam.nl/v1/verkiezingen/processenverbaal/?verkiezingsjaar=2024&page_size=10000&documentnaam[like]='
+  'https://api.data.amsterdam.nl/v1/verkiezingen/processenverbaal/?verkiezingsjaar=2024&page_size=10000&documentnaam[like]=*pv_referendum_hoofdgroenstructuur'
 
 const zeroPad = (num, places) => String(num).padStart(places, '0')
 
@@ -36,7 +36,7 @@ const SpinnerWrapper = styled.div`
 function App() {
   const [data, setData] = useState()
   const [config, setConfig] = useState()
-  const [district, setDistrict] = useState('.c.')
+  const [district, setDistrict] = useState('.C.')
   const [value, setValue] = useState('placeholder')
   const [downloadLoading, downloadFile, error] = useDownload()
   const [resetError, setResetError] = useState(false)
@@ -112,7 +112,7 @@ function App() {
       <Paragraph>
         {config && (
           <Link
-            href={`${config?.applicatie['extra-velden']?.variabelen?.value}overzicht-stembureaus-tk-2023.pdf`}
+            href={`${config?.applicatie['extra-velden']?.variabelen?.value}overzicht-stembureaus-ep-ref-2024.pdf`}
             variant="inline"
             target="_blank"
           >
@@ -126,14 +126,14 @@ function App() {
           onChange={handleDistrictChange}
           label={'Kies stadsdeel'}
         >
-          <option value=".c.">Centrum</option>
-          <option value=".nw.">Nieuw-West</option>
-          <option value=".n.">Noord</option>
-          <option value=".o.">Oost</option>
-          <option value=".w.">West</option>
-          <option value=".z.">Zuid</option>
-          <option value=".zo.">Zuidoost</option>
-          <option value=".weesp.">Weesp</option>
+          <option value=".C.">Centrum</option>
+          <option value=".NW.">Nieuw-West</option>
+          <option value=".N.">Noord</option>
+          <option value=".O.">Oost</option>
+          <option value=".W.">West</option>
+          <option value=".Z.">Zuid</option>
+          <option value=".ZO.">Zuidoost</option>
+          <option value=".Weesp.">Weesp</option>
           <option value="">Alle</option>
         </StyledSelect>
         {data ? (
