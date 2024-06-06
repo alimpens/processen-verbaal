@@ -14,6 +14,8 @@ import { Download } from '@amsterdam/asc-assets'
 import styled from 'styled-components'
 import useDownload from './useDownload'
 
+// pv_referendum_hoofdgroenstructuur of pv_europees_parlement_2024
+
 const urlFragment =
   'https://api.data.amsterdam.nl/v1/verkiezingen/processenverbaal/?verkiezingsjaar=2024&page_size=10000&documentnaam[like]=*pv_referendum_hoofdgroenstructuur'
 
